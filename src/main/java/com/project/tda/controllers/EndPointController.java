@@ -1,5 +1,6 @@
 package com.project.tda.controllers;
 
+import com.project.tda.services.AnalyzerService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,8 @@ public class EndPointController {
         String content = "Test";
         try {
             content = new String(file.getBytes(), "UTF-8");
+            AnalyzerService analyzerService = new AnalyzerService();
+            content = analyzerService.analyze(content);
         } catch (IOException e) {
             e.printStackTrace();
         }
