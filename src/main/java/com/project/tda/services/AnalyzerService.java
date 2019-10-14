@@ -4,15 +4,21 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AnalyzerService {
-    DumpAnalyzerService dumpAnalyzerService;
+    BasicAnalyzerService basicAnalyzerService;
+    FurtherAnalyzerService furtherAnalyzerService;
 
     public AnalyzerService(){
-        dumpAnalyzerService = new DumpAnalyzerService();
+        basicAnalyzerService = new BasicAnalyzerService();
+        furtherAnalyzerService = new FurtherAnalyzerService();
     }
 
     public String analyze(String dump){
         String result = "Test";
-        result = dumpAnalyzerService.generateAnalysis(dump);
+        result = basicAnalyzerService.generateAnalysis(dump);
+        furtherAnalyzerService.stateviseSummary(result);
+        furtherAnalyzerService.deamonSummary(result);
+        furtherAnalyzerService.stackLengthSummary(result);
+        furtherAnalyzerService.identicalStackTrace(result);
         return result;
     }
 }

@@ -19,6 +19,7 @@ public class SingleThreadAnalyzerService {
 
     Map synchronizerClasses = new HashMap();
     String threadState = null;
+
     // Only synchronized(){} style locks
     String classicalLockHeld = null;
 
@@ -85,7 +86,11 @@ public class SingleThreadAnalyzerService {
         //method calls
         String frames_reg = "^\\s+at (.*)";
         String frame = stack_regex(frames_reg, line, 0);
+
         if (frame != "undefined") {
+            //Cleansing string removing "/tat " part
+            //TODO: Check whether match with all patterns
+            frame = frame.substring(4);
             frames.add(frame);
             return;
         }
@@ -147,10 +152,6 @@ public class SingleThreadAnalyzerService {
             // Ignore these lines
             return;
         }
-
-//        return false;
-
-
     }
 
 
