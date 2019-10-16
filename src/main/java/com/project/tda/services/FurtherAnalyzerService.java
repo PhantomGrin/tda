@@ -10,15 +10,16 @@ import java.util.*;
 @Service
 public class FurtherAnalyzerService {
 
-    Map<String,List<String>> deamons = new HashMap<>();
-    Map<String,List<String>> stackLength = new HashMap<>();
-    Map<String,List<String>> threadStatus = new HashMap<>();
+    private Map<String,List<String>> deamons = new HashMap<>();
+    private Map<String,List<String>> stackLength = new HashMap<>();
+    private Map<String,List<String>> threadStatus = new HashMap<>();
 
-    Map<String,ArrayList<Object>> identicleStackTrace = new HashMap<>();
-    Map<String,ArrayList<Object>> unidenticleStackTrace = new HashMap<>();
-    Map<String,String> stackTraceMap = new HashMap<String, String>();
+    private Map<String,List<String>> identicleStackTrace = new HashMap<>();
 
-    public String stateviseSummary(String basicAnalysis){
+    private Map<String, JsonArray> stackTraceMap = new HashMap<String, JsonArray>();
+
+    public Map<String,List<String>> stateviseSummary(String basicAnalysis){
+        threadStatus.clear();
         JsonArray basicAnalysisArray = new JsonParser().parse(basicAnalysis).getAsJsonArray();
 
         for (int i = 0; i < basicAnalysisArray.size(); i++) {
@@ -34,12 +35,11 @@ public class FurtherAnalyzerService {
                 threadStatus.put(status, allthreads);
             }
         }
-        System.out.println(threadStatus);
-        String results = "";
-        return results;
+        return threadStatus;
     }
 
-    public String deamonSummary(String basicAnalysis){
+    public Map<String,List<String>> deamonSummary(String basicAnalysis){
+        deamons.clear();
         JsonArray basicAnalysisArray = new JsonParser().parse(basicAnalysis).getAsJsonArray();
 
         for (int i = 0; i < basicAnalysisArray.size(); i++) {
@@ -55,12 +55,11 @@ public class FurtherAnalyzerService {
                 deamons.put(daemon, allthreads);
             }
         }
-        System.out.println(deamons);
-        String results = "";
-        return results;
+        return deamons;
     }
 
-    public String stackLengthSummary(String basicAnalysis){
+    public Map<String, List<String>> stackLengthSummary(String basicAnalysis){
+        stackLength.clear();
         JsonArray basicAnalysisArray = new JsonParser().parse(basicAnalysis).getAsJsonArray();
 
         for (int i = 0; i < basicAnalysisArray.size(); i++) {
@@ -87,15 +86,10 @@ public class FurtherAnalyzerService {
                 stackLength.put(key, allthreads);
             }
         }
-
-        System.out.println(stackLength);
-
-        String results = "";
-        return results;
+        return stackLength;
     }
 
-    //TODO: Check how to find identicle stack trace
-    public String identicalStackTrace(String basicAnalysis){
+    public Map<String, List<String>> identicalStackTraceSummary(String basicAnalysis){
         JsonArray basicAnalysisArray = new JsonParser().parse(basicAnalysis).getAsJsonArray();
 
         for (int i = 0; i < basicAnalysisArray.size(); i++) {
@@ -107,7 +101,13 @@ public class FurtherAnalyzerService {
                 JsonObject currentObject2 = basicAnalysisArray.get(j).getAsJsonObject();
                 JsonArray frames2 = currentObject2.get("frames").getAsJsonArray();
 
-                if(frames.toString().equals(frames2.toString())){
+                String frames_str = frames.toString();
+                String frames2_str = frames2.toString();
+
+                frames_str = frames_str.replaceAll("\\P{L}", "");
+                frames2_str = frames2_str.replaceAll("\\P{L}", "");
+
+                if(frames_str.equals(frames2_str)){
                     if(identicleStackIDs.isEmpty()){
                         identicleStackIDs.add(currentObject.get("id").getAsString());
                     }
@@ -123,27 +123,21 @@ public class FurtherAnalyzerService {
             }else{
                 key = "ST"+(String.valueOf(i+1));
             }
-            stackTraceMap.put(key, frames.toString());
+            stackTraceMap.put(key, frames);
 
             if(identicleStackIDs.isEmpty()){
                 identicleStackIDs.add(currentObject.get("id").getAsString());
-                unidenticleStackTrace.put(key, identicleStackIDs);
+                identicleStackTrace.put(key, identicleStackIDs);
             }else{
                 identicleStackTrace.put(key, identicleStackIDs);
             }
 
         }
-        System.out.println("#######################");
-        System.out.println(identicleStackTrace);
-        System.out.println(unidenticleStackTrace);
-        String results = "";
-        return results;
-    }
-    public String culpritReport(String basicAnalysis){
-        JsonObject basicAnalysisObject = new JsonParser().parse(basicAnalysis).getAsJsonObject();
-        String results = "";
-        return results;
+
+        return identicleStackTrace;
     }
 
-
+    public Map<String, JsonArray> getStackTraceMap() {
+        return stackTraceMap;
+    }
 }

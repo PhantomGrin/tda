@@ -1,6 +1,5 @@
 package com.project.tda.services;
 
-import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -23,14 +22,14 @@ public class BasicAnalyzerService {
         utils = new Utils();
     }
 
-    public String generateAnalysis(String datas) {
-        String result = "none";
+    public ArrayList<SingleThreadAnalyzerService> generateAnalysis(String datas) {
+        ArrayList<SingleThreadAnalyzerService> result = null;
         String[] splittedLines = datas.split("\n");
         result = analyze(splittedLines);
         return result;
     }
 
-    private String analyze(String[] splittedLines) {
+    private ArrayList<SingleThreadAnalyzerService> analyze(String[] splittedLines) {
         String date_pattern = "^([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$";
         String date = null;
 
@@ -94,14 +93,7 @@ public class BasicAnalyzerService {
         analyzeSynchronizerAnalysisService();
         analyzeDeadlocks();
 
-
-//        JsonObject obj = new JsonObject();
-//        JsonObject message = new JsonObject();
-//        message.addProperty("action", action);
-        String results = "None";
-        results = new Gson().toJson(threads);
-
-        return results;
+        return threads;
     }
 
     private void identifyWaitedSync() {
@@ -269,8 +261,6 @@ public class BasicAnalyzerService {
 
 
     private void addString(String line, SingleThreadAnalyzerService source) {
-
-
         if (!runningMethods.containsKey(line)) {
             ArrayList arr = new ArrayList();
             arr.add(source);
@@ -282,4 +272,6 @@ public class BasicAnalyzerService {
             counter.pushSource(source);
         }
     }
+
+    public Map<String, SynchronizerAnalysisService> getSync (){return synchronizerMap;}
 }
