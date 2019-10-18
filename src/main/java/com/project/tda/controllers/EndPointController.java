@@ -9,8 +9,9 @@ import java.io.IOException;
 @RestController
 public class EndPointController {
     AnalyzerService analyzerService;
-    EndPointController(){
-        analyzerService = new AnalyzerService();
+
+    EndPointController(AnalyzerService analyzerService){
+        this.analyzerService = analyzerService;
     }
 
     @GetMapping("/")

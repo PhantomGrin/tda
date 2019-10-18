@@ -133,7 +133,6 @@ public class FurtherAnalyzerService {
             }
 
         }
-
         return identicleStackTrace;
     }
 

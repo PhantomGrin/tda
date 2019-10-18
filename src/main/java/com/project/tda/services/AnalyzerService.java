@@ -1,21 +1,25 @@
 package com.project.tda.services;
 
 import com.google.gson.Gson;
+import com.project.tda.models.ThreadDumps;
+import com.project.tda.repositories.ThreadDumpsRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
 public class AnalyzerService {
     BasicAnalyzerService basicAnalyzerService;
     FurtherAnalyzerService furtherAnalyzerService;
+    private ThreadDumpsRepo threadDumpsRepo;
 
-    public AnalyzerService(){
-        basicAnalyzerService = new BasicAnalyzerService();
-        furtherAnalyzerService = new FurtherAnalyzerService();
+    public AnalyzerService(ThreadDumpsRepo threadDumpsRepo,BasicAnalyzerService basicAnalyzerService,FurtherAnalyzerService furtherAnalyzerService){
+        this.basicAnalyzerService = basicAnalyzerService;
+        this.furtherAnalyzerService =furtherAnalyzerService;
+        this.threadDumpsRepo=threadDumpsRepo;
     }
 
     public String analyze(String dump){
@@ -41,6 +45,8 @@ public class AnalyzerService {
         message.put("identicle_stack_map", furtherAnalyzerService.getStackTraceMap());
 
         result =  new Gson().toJson(message);
+
+        threadDumpsRepo.save(new ThreadDumps("test", result));
         basicAnalysis.clear();
         return result;
     }

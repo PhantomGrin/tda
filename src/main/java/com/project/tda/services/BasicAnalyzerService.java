@@ -6,7 +6,7 @@ import java.util.*;
 
 @Service
 public class BasicAnalyzerService {
-    Utils utils;
+    Utils utils = new Utils();
     int id_count = 0;
     ArrayList<SingleThreadAnalyzerService> threads = new ArrayList();
     Map threadMap = new HashMap();
@@ -17,10 +17,6 @@ public class BasicAnalyzerService {
     String deadlockStatus = null;
 
     Map<String, Counter> runningMethods = new HashMap();
-
-    public BasicAnalyzerService() {
-        utils = new Utils();
-    }
 
     public ArrayList<SingleThreadAnalyzerService> generateAnalysis(String datas) {
         ArrayList<SingleThreadAnalyzerService> result = null;
