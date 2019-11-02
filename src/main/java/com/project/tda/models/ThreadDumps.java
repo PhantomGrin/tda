@@ -10,6 +10,7 @@ public class ThreadDumps {
     private int threadId;
 
     private String name;
+    private String username;
 
     @Lob
     private String resultString;

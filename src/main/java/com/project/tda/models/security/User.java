@@ -70,9 +70,7 @@ public class User {
         this.team = team;
     }
 
-    public User() {
-        // TODO Auto-generated constructor stub
-    }
+    public User() {}
 
     public User(String username, String password, String email) {
         this.username = username;

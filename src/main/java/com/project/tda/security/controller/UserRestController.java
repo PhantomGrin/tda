@@ -43,6 +43,14 @@ public class UserRestController {
         JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
         return user;
     }
+    @RequestMapping(value = "user", method = RequestMethod.POST)
+    public JwtUser editAuthenticatedUser(HttpServletRequest request,@RequestBody User user) {
+        String token = request.getHeader(tokenHeader).substring(7);
+        String username = jwtTokenUtil.getUsernameFromToken(token);
+        JwtUser usersaved = (JwtUser) userDetailsService.loadUserByUsername(username);
+        System.out.println(usersaved.getTeam());
+        return usersaved;
+    }
 
     @PostMapping("auth/registration")
     public ResponseEntity<ObjectNode> createUser(@RequestBody User user) {
