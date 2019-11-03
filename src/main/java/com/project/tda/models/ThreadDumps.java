@@ -1,6 +1,9 @@
 package com.project.tda.models;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class ThreadDumps {
@@ -14,6 +17,9 @@ public class ThreadDumps {
     private String username;
 
     private String date;
+
+    @CreationTimestamp
+    private Date analysisDate;
 
     @Lob
     private String resultString;

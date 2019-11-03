@@ -40,12 +40,13 @@ public class EndPointController {
     @CrossOrigin
     @PostMapping("/analyze")
     public String Analyze(HttpServletRequest request, @RequestParam MultipartFile file){
+        String filename = file.getOriginalFilename().split("\\.")[0];
         String token = request.getHeader(tokenHeader).substring(7);
         String username = jwtTokenUtil.getUsernameFromToken(token);
         String content = "Test";
         try {
             content = new String(file.getBytes(), "UTF-8");
-            content = analyzerService.analyze(content, username);
+            content = analyzerService.analyze(content, username, filename);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,7 +58,7 @@ public class EndPointController {
     public String Analyze(@RequestParam String text){
         String content = "Test";
         try {
-            content = analyzerService.analyze(text, "sample");
+            content = analyzerService.analyze(text, "sample", "sample");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,9 +77,10 @@ public class EndPointController {
 
     @CrossOrigin
     @GetMapping("/getresult")
-    public String getResult(@RequestParam int id){
+    public String getResult(@RequestParam String id){
+        int analysisId = Integer.valueOf(id);
         String resultString = "None";
-        Optional<ThreadDumps> dump = threadDumpsRepo.findById(id);
+        Optional<ThreadDumps> dump = threadDumpsRepo.findById(analysisId);
 
         if(dump.isPresent()){
             resultString = dump.get().getResultString();

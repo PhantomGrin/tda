@@ -22,7 +22,7 @@ public class AnalyzerService {
         this.threadDumpsRepo=threadDumpsRepo;
     }
 
-    public String analyze(String dump, String username){
+    public String analyze(String dump, String username, String filename){
         String result;
         Map<String, Object> message = new HashMap<>();
         ArrayList<SingleThreadAnalyzerService> basicAnalysis = basicAnalyzerService.generateAnalysis(dump);
@@ -49,7 +49,7 @@ public class AnalyzerService {
 
         if(!(username.equals("sample"))){
             System.out.println(date);
-            ThreadDumps threadDumps = threadDumpsRepo.save(new ThreadDumps("test", result, username, date));
+            ThreadDumps threadDumps = threadDumpsRepo.save(new ThreadDumps(filename, result, username, date));
             System.out.println(threadDumps.getThreadId());
         }
 
