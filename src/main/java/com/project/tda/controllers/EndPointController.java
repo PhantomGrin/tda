@@ -2,8 +2,11 @@ package com.project.tda.controllers;
 
 import com.google.gson.Gson;
 import com.project.tda.models.ThreadDumps;
+import com.project.tda.models.security.User;
 import com.project.tda.repositories.ThreadDumpsRepo;
 import com.project.tda.security.JwtTokenUtil;
+import com.project.tda.security.repository.UserRepository;
+import com.project.tda.security.service.UserFunctionService;
 import com.project.tda.services.AnalyzerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +30,9 @@ public class EndPointController {
 
     @Autowired
     private ThreadDumpsRepo threadDumpsRepo;
+
+    @Autowired
+    private UserFunctionService userFunctionService;
 
     EndPointController(AnalyzerService analyzerService){
         this.analyzerService = analyzerService;
@@ -86,5 +92,27 @@ public class EndPointController {
             resultString = dump.get().getResultString();
         }
         return resultString;
+    }
+
+    @CrossOrigin
+    @GetMapping("/team")
+    public String getTeamMembers(HttpServletRequest request){
+        String token = request.getHeader(tokenHeader).substring(7);
+        String username = jwtTokenUtil.getUsernameFromToken(token);
+        return new Gson().toJson(userFunctionService.getTeamMembers(username));
+    }
+
+    @CrossOrigin
+    @GetMapping("/share")
+    public String sharedump(@RequestParam String username,@RequestParam int id){
+        return new Gson().toJson(userFunctionService.shareAnalyze(username,id));
+    }
+
+    @CrossOrigin
+    @GetMapping("/shared")
+    public String getshared(HttpServletRequest request){
+        String token = request.getHeader(tokenHeader).substring(7);
+        String username = jwtTokenUtil.getUsernameFromToken(token);
+        return new Gson().toJson(userFunctionService.getsharedtome(username));
     }
 }

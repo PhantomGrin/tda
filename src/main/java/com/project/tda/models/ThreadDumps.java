@@ -1,9 +1,13 @@
 package com.project.tda.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.tda.models.security.User;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class ThreadDumps {
@@ -23,6 +27,11 @@ public class ThreadDumps {
 
     @Lob
     private String resultString;
+
+    @ManyToMany
+    @JsonIgnore
+    @JsonBackReference
+    private Set<User> sharedwithusers;
 
     public int getThreadId() {
         return threadId;

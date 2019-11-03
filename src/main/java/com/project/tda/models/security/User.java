@@ -1,10 +1,15 @@
 package com.project.tda.models.security;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.project.tda.models.ThreadDumps;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "USER")
@@ -60,6 +65,14 @@ public class User {
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")})
     private List<Authority> authorities;
+
+    @ManyToMany
+    @JsonManagedReference
+    @JoinTable(
+            name = "USER_THREADS",
+            joinColumns = @JoinColumn(name = "USERNAME"),
+            inverseJoinColumns = @JoinColumn(name = "threadId"))
+    private Set<ThreadDumps> sharedThreads;
 
     public User(String username, String password, String email, String fname, String lname, String team) {
         this.username = username;
@@ -158,5 +171,11 @@ public class User {
         this.lastPasswordResetDate = lastPasswordResetDate;
     }
 
+    public Set<ThreadDumps> getSharedThreads() {
+        return sharedThreads;
+    }
 
+    public void setSharedThreads(Set<ThreadDumps> sharedThreads) {
+        this.sharedThreads = sharedThreads;
+    }
 }
