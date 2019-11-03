@@ -22,11 +22,12 @@ public class AnalyzerService {
         this.threadDumpsRepo=threadDumpsRepo;
     }
 
-    public String analyze(String dump){
+    public String analyze(String dump, String username){
         String result;
         Map<String, Object> message = new HashMap<>();
         ArrayList<SingleThreadAnalyzerService> basicAnalysis = basicAnalyzerService.generateAnalysis(dump);
         Map<String, SynchronizerAnalysisService> syncMap = basicAnalyzerService.getSync();
+        String date = basicAnalyzerService.getDate();
 
         HashMap<String, SingleThreadAnalyzerService> threadAnalysisMap = new HashMap<>();
         for (SingleThreadAnalyzerService singleThread : basicAnalysis) {
@@ -46,7 +47,12 @@ public class AnalyzerService {
 
         result =  new Gson().toJson(message);
 
-        threadDumpsRepo.save(new ThreadDumps("test", result));
+        if(!(username.equals("sample"))){
+            System.out.println(date);
+            ThreadDumps threadDumps = threadDumpsRepo.save(new ThreadDumps("test", result, username, date));
+            System.out.println(threadDumps.getThreadId());
+        }
+
         basicAnalysis.clear();
         return result;
     }

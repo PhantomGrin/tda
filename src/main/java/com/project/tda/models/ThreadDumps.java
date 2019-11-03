@@ -10,7 +10,10 @@ public class ThreadDumps {
     private int threadId;
 
     private String name;
+
     private String username;
+
+    private String date;
 
     @Lob
     private String resultString;
@@ -35,9 +38,19 @@ public class ThreadDumps {
         this.resultString = resultString;
     }
 
-    public ThreadDumps(String name, String resultString) {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public ThreadDumps(String name, String resultString, String username, String date) {
         this.name = name;
         this.resultString = resultString;
+        this.username = username;
+        this.date = date;
     }
 
     public ThreadDumps() {

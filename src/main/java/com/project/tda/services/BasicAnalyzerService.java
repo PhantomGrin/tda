@@ -15,6 +15,7 @@ public class BasicAnalyzerService {
     ArrayList ignoredData = new ArrayList(); //counts
     Map<String, ArrayList<String>> blockersMap = new HashMap<>();
     String deadlockStatus = null;
+    String date = null;
 
     Map<String, Counter> runningMethods = new HashMap();
 
@@ -27,7 +28,6 @@ public class BasicAnalyzerService {
 
     private ArrayList<SingleThreadAnalyzerService> analyze(String[] splittedLines) {
         String date_pattern = "^([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$";
-        String date = null;
 
         SingleThreadAnalyzerService currentThread = null;
         for (String line : splittedLines) {
@@ -270,4 +270,5 @@ public class BasicAnalyzerService {
     }
 
     public Map<String, SynchronizerAnalysisService> getSync (){return synchronizerMap;}
+    public String getDate(){return date;}
 }
