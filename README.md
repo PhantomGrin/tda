@@ -17,3 +17,5 @@ git clone https://github.com/PhantomGrin/threadheros.git
 <username>          ==> your username for database
 <password>          ==> your password for database
 ```
+* Run the application 
+* Open  ```localhost:8080/tda/index.html``` in the browser
