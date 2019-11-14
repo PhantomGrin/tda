@@ -1,0 +1,40 @@
+:root {
+    --main-purple:#24116a;
+    --main-blue: #3ec8cf;
+}
+
+.landing-top{
+    height: 65vh;
+    background-image: linear-gradient( to bottom left, var(--main-blue), var(--main-purple), var(--main-purple));
+}
+
+#landing-page-image{
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+}
+
+.image-holder{
+    display: inline-block;
+}
+
+.text-holder{
+    display: block;
+    color: var(--main-purple);
+}
+
+#upper-text{
+    margin-top: 2em;
+}
+
+#upper-text-p{
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 700;
+    font-size: 1.6em;
+}
+
+#below-text-p{
+    font-weight: 500;
+    font-size: 1.2em;
+    font-family: 'Raleway', sans-serif;
+}

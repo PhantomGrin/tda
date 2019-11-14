@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Thread Heros</title>
+	<meta name="description" content="Secure, Feature-rich, Collaborative way to analyze your Thread Dumps">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="savindi">
+
+	<!-- ================= Favicon ================== -->
+	<link rel="shortcut icon" href="images/favicon.png">
+
+	<!-- ============== Bootstrap 4.0 ============== -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+	<!-- ============== Font Awesome ============== -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
+	
+	<!-- ============== Resources style ============== -->
+	<link rel="stylesheet" href="CSS/nav.css" />
+	<link rel="stylesheet" href="CSS/buttons.css" />
+	<link rel="stylesheet" href="CSS/account.css" />
+
+	<!-- ============== Fonts ============== -->
+	<link href="https://fonts.googleapis.com/css?family=Kalam:300,400,700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container-fluid">
+
+		<!-- ============== NavBar ============== -->
+		<nav class="navbar navbar-expand-lg static-top">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">
+					<img class="brand-logo" src="images/LogoColoured.png" alt="Logo">
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto topBotomBordersOut">
+						<li class="nav-item nav-animation">
+								<a class="nav-link" href="upload.html">UPLOAD<span class="sr-only"></span></a>
+							  </li>
+					<li class="nav-item nav-animation">
+						<a class="nav-link" href="analysis.html">YOUR ANALYSIS</a>
+					</li>
+					<li class="nav-item nav-animation">
+						<a class="nav-link" href="shared.html">SHARED ANALYSIS</a>
+					</li>
+					<li class="nav-item active nav-animation">
+						<a class="nav-link" href="#">ACCOUNT<span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item nav-animation">
+						<a id="logout-btn" class="nav-link" href="#"  data-toggle="modal" data-target="#logoutModal">LOGOUT</a>
+					</li>
+					<li class="nav-item nav-animation">
+						<a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
+					</li>
+				</ul>
+				</div>
+			</div>
+		</nav>	
+
+		<!-- ============== Page Content ============== -->
+		<div class="container page-content">
+			<div class="row justify-content-center">
+				<div class="col-sm-4 col-md-4 col-lg-3 column">
+					<div class="row justify-content-center">
+						<div class="col-12 col-sm-12 justify-content-center column2"> <img class="avatar" src="images/avatar.jpg" alt="Avatar"></div>
+						<div class="col-6 col-sm-12 column2"> <button id="edit-user" class="btn btn--border">Edit Profile<span></span></button></div>
+						<div class="col-6 col-sm-12 column2"> <button class="btn btn--border">Reset Password<span></span></button></div>
+					</div>
+				</div>
+				<div class="col-sm-8 col-md-8 col-lg-9 column">
+					<div class="row content-wrap"><p class="username">Hello <span id="hello-user">Savindi</span>!</p></div>
+					<div class="form-wrap">
+						<form class="form-horizontal">
+							<fieldset>								
+								<!-- Text input-->
+								<div class="row form-group">
+									<label class="col-md-4 control-label" for="fname">First Name</label>  
+									<div class="col-md-6">
+									<input id="fname" name="fname" type="text" placeholder="First Name" value="None" class="form-control input-md" required="" disabled>
+									
+									</div>
+								</div>
+								
+								<!-- Text input-->
+								<div class="row form-group">
+									<label class="col-md-4 control-label" for="lname">Last Name</label>  
+									<div class="col-md-6">
+									<input id="lname" name="lname" type="text" placeholder="Last Name" value="None" class="form-control input-md" required="" disabled>
+									
+									</div>
+								</div>
+								
+								<!-- Text input-->
+								<div class="row form-group">
+									<label class="col-md-4 control-label" for="email">E-mail</label>  
+									<div class="col-md-6">
+									<input id="email" name="email" type="text" placeholder="E-mail" value="None" class="form-control input-md" required="" disabled>
+									
+									</div>
+								</div>
+								
+								<!-- Text input-->
+								<div class="row form-group">
+									<label class="col-md-4 control-label" for="team">Team</label>  
+									<div class="col-md-6">
+									<input id="team" name="team" type="text" placeholder="Team" value="None" class="form-control input-md" required="" disabled>
+									
+									</div>
+								</div>
+								
+							</fieldset>
+						</form>
+						<div class=""> <button id="save-user" class="btn btn--border">Update Profile<span></span></button></div>		
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+		
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+			  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">×</span>
+			  </button>
+			</div>
+			<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+			<div class="modal-footer adjust">
+			  <button class="btn btn-reset btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+			  <a id="final-logout-btn" class="btn btn-reset btn-primary" href="#">Logout</a>
+			</div>
+		  </div>
+		</div>
+	  </div>
+		
+
+	 <!-- Edit profile msg Modal-->
+	 <div class="modal fade" id="editModel" tabindex="-1" role="dialog" aria-labelledby="msgModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title" id="msgModalLabel"></h5>
+				  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				  </button>
+				</div>
+				<div class="modal-body" id="msgModelBody"></div>
+				
+			  </div>
+			</div>
+		  </div>
+	</div>
+	
+	
+	<!-- ============== Bootstrap 4.0 JavaScripts ============== -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	
+	<!-- ============== Custom JavaScripts ============== -->
+	<script type="text/javascript" src="JS/settings.js"></script>
+	<script type="text/javascript" src="JS/user_control_functions.js"></script>
+	<script type="text/javascript" src="JS/account.js"></script>
+	<script type="text/javascript" src="JS/common_functions.js"></script>
+</body>
+</html>

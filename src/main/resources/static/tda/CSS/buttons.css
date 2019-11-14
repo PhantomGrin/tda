@@ -1,0 +1,109 @@
+:root {
+    --main-purple:#24116a;
+    --main-blue: #3ec8cf;
+    --light-blue: #63eaf1;
+}
+
+.btn {
+    font-size: 1.5em;
+    cursor: pointer;
+    border: 2px solid var(--main-blue);
+    outline: none;
+    color: var(--main-blue);
+    background-color: var(--main-purple);
+    margin: 1em;
+    font-family: 'Kalam', cursive; 
+    font-weight: 700;
+    position: relative;
+    white-space: nowrap;
+    width: 300px;
+  }
+  .btn--border:hover{
+      color: var(--light-blue);
+  }
+  .btn--border::after, .btn--border::before,
+  .btn--border span::after,
+  .btn--border span::before {
+    content: "";
+    position: absolute;
+    background-color: var(--main-blue);
+    transition: 0.5s ease;
+  }
+  .btn--border::after, .btn--border::before {
+    height: 100%;
+    width: 2px;
+    top: -2px;
+  }
+  .btn--border::after {
+    left: -2px;
+  }
+  .btn--border::before {
+    right: -2px;
+  }
+  .btn--border span::after,
+  .btn--border span::before {
+    height: 2px;
+    width: 100%;
+    left: -2px;
+  }
+  .btn--border span::after {
+    top: -2px;
+  }
+  .btn--border span::before {
+    bottom: -2px;
+  }
+  .btn--border:hover:after {
+    transform: translatex(-6px);
+  }
+  .btn--border:hover:before {
+    transform: translatex(6px);
+  }
+  .btn--border:hover span::after {
+    transform: translatey(-6px);
+  }
+  .btn--border:hover span::before {
+    transform: translatey(6px);
+  }
+  
+#sample{
+  background: none;
+  background-color: var(--main-purple) !important;
+}
+
+.btn-reset{
+  display: inline-block;
+  font-weight: 400;
+  color: #212529;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  font-family: 'Raleway', sans-serif !important;
+  width: 150px !important;
+}
+
+.btn-secondary {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-primary{
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.adjust{
+  display: flex;
+  float: right;
+}
