@@ -1,4 +1,4 @@
-# TDA - Thread Dump Analyzer
+# ThreadHeros - Thread Dump Analyzer
 University project to Analyze Thread Dumps
 
 ## Local Deployment
