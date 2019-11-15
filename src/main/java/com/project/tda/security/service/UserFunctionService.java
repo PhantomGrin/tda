@@ -78,4 +78,15 @@ public class UserFunctionService {
         User user=userRepository.findByUsername(username);
         return user.getSharedThreads();
     }
+
+
+    public String deleteAnalyze(int threadid){
+        Optional<ThreadDumps> threadDump=threadDumpsRepo.findById(threadid);
+        if (threadDump.isPresent()){
+            threadDumpsRepo.delete(threadDump.get());
+            return "sucess";
+
+        }
+        return"error";
+    }
 }

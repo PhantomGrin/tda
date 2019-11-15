@@ -115,4 +115,10 @@ public class EndPointController {
         String username = jwtTokenUtil.getUsernameFromToken(token);
         return new Gson().toJson(userFunctionService.getsharedtome(username));
     }
+
+    @CrossOrigin
+    @GetMapping("/delete")
+    public String getshared(HttpServletRequest request,@RequestParam int id){
+        return userFunctionService.deleteAnalyze(id);
+    }
 }
